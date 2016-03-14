@@ -16,10 +16,15 @@ RUN yum -y install nodejs \
            make \
            libnotify
 
-RUN npm update -g npm
+RUN npm update -g npm \
+                  fsevents \
+                  gulp \
+                  gulp-cli
 
-RUN npm install -g gulp node-gyp
+RUN adduser laravel && \
+    usermod -g nginx laravel
 
-RUN usermod -u 1000 nginx
+RUN mkdir /var/storage
 
 WORKDIR /var/www/html
+
